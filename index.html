@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HON</title>
+    <style>
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      }
+
+      body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background-color: #f8f9fa;  
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+      }
+
+      .container {
+      display: flex;
+      flex-direction: column;
+      max-width: 1200px;
+      width: 100%;
+      gap: 20px;
+      }
+
+      #gl-canvas {
+      width: 100%;
+      height: 80vh;
+      background-color: #111;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 10px;
+      min-width: 300px;
+      }
+
+      .control-group > div {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      }
+
+      label {
+      font-weight: 600;
+      color: #444;
+      }
+
+      button {
+      padding: 10px 18px;
+      background-color: #e9ecef;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      button:hover {
+      background-color: #ced4da;
+      transform: translateY(-2px);
+      }
+
+      button.active {
+      background-color: #3f80ea;
+      color: white;
+      box-shadow: 0 4px 8px rgba(63, 128, 234, 0.3);
+      }
+
+      input[type="range"] {
+      width: 180px;
+      height: 6px;
+      background: #e9ecef;
+      border-radius: 5px;
+      outline: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #3f80ea;
+      cursor: pointer;
+      }
+
+      select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #ced4da;
+      background-color: white;
+      cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+      }
+      
+      #gl-canvas {
+        height: 60vh;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="gl-canvas"></canvas>
+      <div class="controls">
+        <div class="control-group">
+          <label>Projection:</label>
+          <button id="perspective" class="active">Perspective</button>
+          <button id="orthogonal">Orthogonal</button>
+        </div>
+        <div class="control-group">
+          <label>Rotation Speed:</label>
+          
+          <div>
+            <label>H:</label>
+            <input
+              type="range"
+              id="h-rotation-speed"
+              min="0"
+              max="30"
+              value="5"
+            />
+            <select id="h-rotation-axis">
+              <option value="x">X Axis</option>
+              <option value="y" selected>Y Axis</option>
+              <option value="z">Z Axis</option>
+            </select>
+          </div>
+          <div>
+            <label>O:</label>
+            <input
+              type="range"
+              id="o-rotation-speed"
+              min="0"
+              max="30"
+              value="8"
+            />
+            <select id="o-rotation-axis">
+              <option value="x">X Axis</option>
+              <option value="y" selected>Y Axis</option>
+              <option value="z">Z Axis</option>
+            </select>
+          </div>
+          <div>
+            <label>N:</label>
+            <input
+              type="range"
+              id="n-rotation-speed"
+              min="0"
+              max="30"
+              value="12"
+            />
+            <select id="n-rotation-axis">
+              <option value="x">X Axis</option>
+              <option value="y" selected>Y Axis</option>
+              <option value="z">Z Axis</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- gl-matrix library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"></script>
+
+    <!-- Our scripts -->
+    <script src="webgl.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>
